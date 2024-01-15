@@ -19,8 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/user/{userId}/balance', [UserController::class, 'getBalance']);
+// Rota para criar um novo investimento
+Route::post('/investments', [InvestmentController::class, 'create']);
 
-Route::post('/investment/create', [InvestmentController::class, 'create']);
-Route::post('/investment/withdraw/{investmentId}', [InvestmentController::class, 'withdraw']);
-Route::get('/user/{userId}/investments', [InvestmentController::class, 'listInvestments']);
+// Rota para realizar uma retirada de investimento
+Route::put('/investments/{investmentId}/withdraw', [InvestmentController::class, 'withdraw']);
+
+// Rota para listar os investimentos de um usuário paginados
+Route::get('/investments/{userId}', [InvestmentController::class, 'listInvestments']);
